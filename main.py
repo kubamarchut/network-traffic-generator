@@ -18,11 +18,12 @@ def main_part(thread_time_span):
     start_time = time.time()
     while True:
         elapsed_time = time.time() - start_time
-        if elapsed_time >= thread_time_span:  # Check if 10 seconds have elapsed
+        if elapsed_time >= thread_time_span:  # Check if n seconds have elapsed
             break
-        random_function = random.randrange(0, len(generate_traffic_functions))
-        print(generate_traffic_functions[random_function].__name__)
-        generate_traffic_functions[random_function](dstIP)
+        
+        random_function = random.choice(generate_traffic_functions)
+        print(random_function.__name__)
+        random_function(dstIP)
         time.sleep(0.1)
 
 def run_traffic_simultaneously(threads_count, thread_time_span):
