@@ -1,3 +1,4 @@
+import sys
 import time
 import random
 import threading
@@ -6,6 +7,7 @@ from modules.ftp_gen import *
 from modules.http_gen import *
 from modules.icmp_gen import *
 from modules.telnet_gen import *
+from modules.ip_information import *
 
 generate_traffic_functions = [
     {"func": generate_ftp_traffic, "label": "generating ftp traffic"}, 
@@ -26,9 +28,17 @@ def main_part(thread_time_span, dstIP):
         random_function["func"](dstIP)
         time.sleep(0.1)
 
-def run_traffic_simultaneously(threads_count, thread_time_span, dstIP):
+def run_traffic_simultaneously(threads_count, thread_time_span, dstIP, test_dst):
     print("Starting network traffic generator")
     print("destination IP:", dstIP)
+
+    if test_dst:
+        ip_information_received = ip_information(dstIP)
+        print(ip_information_received)
+        if not ip_information_received:
+            print("Traffic destination unreacheble")
+            sys.exit()
+
     print(f"starting {threads_count} threads")
     print(f"each thread will run for {thread_time_span}s\n")
 
@@ -51,9 +61,10 @@ def run_traffic_simultaneously(threads_count, thread_time_span, dstIP):
 if __name__ == "__main__":
     dstIP = "192.168.0.105"
     threads_count = 1
-    thread_time_span = 10
+    thread_time_span = 1
     run_traffic_simultaneously(
         threads_count, 
         thread_time_span, 
-        dstIP
+        dstIP,
+        True
     )
