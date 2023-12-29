@@ -34,7 +34,6 @@ def run_traffic_simultaneously(threads_count, thread_time_span, dstIP, test_dst)
 
     if test_dst:
         ip_information_received = ip_information(dstIP)
-        print(ip_information_received)
         if not ip_information_received:
             print("Traffic destination unreacheble")
             sys.exit()

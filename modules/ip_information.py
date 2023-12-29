@@ -11,7 +11,7 @@ def arp_scan(target_ip):
         packet = ether / arp
 
         # Wysłanie zapytania ARP i odbiór odpowiedzi
-        result = srp(packet, timeout=3, verbose=0)[0]
+        result = srp(packet, timeout=1, verbose=0)[0]
 
         # Wyświetlenie uzyskanych odpowiedzi
         for sent, received in result:
@@ -22,6 +22,9 @@ def arp_scan(target_ip):
 
 def ip_information(target_ip):
     try:
+        #if not arp_scan(target_ip):
+        #    print("ARP scan failed")
+        #    return False
         # Creating ICMP packet
         packet = IP(dst=target_ip) / ICMP()
 
