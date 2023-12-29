@@ -4,7 +4,6 @@ def generate_http_traffic(dstIP):
     try:
         url = 'http://' + dstIP  # Replace with your desired URL
         response = requests.get(url)
-        print(url)
         if response.status_code == 200:
             return response.text  # Return the response content if successful
         else:

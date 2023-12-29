@@ -6,7 +6,7 @@ def generate_icmp_traffic(dstIP):
         packet = IP(dst=dstIP) / ICMP()
 
         # Sending packet
-        send(packet)
+        send(packet, verbose = 0)
         print("ICMP Packet Sent")
     except Exception as e:
         print("An error occurred:", e)

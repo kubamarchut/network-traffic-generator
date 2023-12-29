@@ -1,5 +1,10 @@
 from ftplib import FTP
 
+verbose = False
+
+def vprint(str):
+        if verbose: print(str)
+
 def simulate_ftp_interaction(hostname, username, password):
     try:
         # Connect to the FTP server
@@ -26,4 +31,5 @@ def generate_ftp_traffic(dstIP):
     simulate_ftp_interaction(dstIP, 'anonymous', 'anonymous')
 
 if __name__ == "__main__":
+    verbose = True
     generate_ftp_traffic("192.168.0.105")
