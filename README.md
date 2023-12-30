@@ -6,7 +6,7 @@ To repozytorium przechowuje materiały zgromadzone przy pracy na projektem "Gene
 
 Skrypt Generatora Ruchu Sieciowego pozwala na symulację ruchu sieciowego poprzez użycie różnych parametrów za pomocą wiersza poleceń. Wykorzystuje moduł `argparse` w języku Python do analizy argumentów podanych w wierszu poleceń i uruchamia odpowiednią symulację ruchu.
 
-### Instalacja
+### Instalacja ⚙️
 
 Po pierwsze wymagane jest pobranie skryptu można to zrobić klonując to repozytorium.
 
@@ -59,7 +59,6 @@ Oto kilka przykładów użycia Generatora Ruchu Sieciowego:
 ### Uwaga ⚠️
 
 - Upewnij się, że masz odpowiednie uprawnienia do wysyłania ruchu sieciowego pod wskazany adres IP docelowy.
-
 - Dostosuj argumenty według swojego środowiska testowego i preferowanych ustawień generacji ruchu.
 
 ## 🖐️ Autorzy
