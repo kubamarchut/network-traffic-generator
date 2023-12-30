@@ -22,7 +22,7 @@ def simulate_ftp_interaction(hostname, username, password):
 
         # Close the FTP connection
         ftp.quit()
-        print("FTP interaction completed successfully.")
+        vprint("FTP interaction completed successfully.")
     except Exception as e:
         print(f"An error occurred: {e}")
 

@@ -1,6 +1,11 @@
 import telnetlib
 import time
 
+verbose = False
+
+def vprint(str):
+    if verbose: print(str)
+
 def simulate_telnet_user(host, username, password):
     try:
         # Connect to the Telnet server
@@ -21,7 +26,7 @@ def simulate_telnet_user(host, username, password):
         tn.write(b"ls\n")
 
         # Read and print the output after sending the command
-        print(tn.read_very_eager().decode('ascii'))
+        vprint(tn.read_very_eager().decode('ascii'))
 
         # Close the Telnet connection
         tn.close()
@@ -33,4 +38,5 @@ def generate_telnet_traffic(dstIP):
     simulate_telnet_user(dstIP, 'pi', 'raspberry')
 
 if __name__ == "__main__":
+    verbose = True
     generate_telnet_traffic("192.168.0.105")
