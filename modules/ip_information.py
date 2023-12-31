@@ -1,6 +1,13 @@
 from scapy.all import IP, ICMP, sr1, ARP, Ether, srp
 import socket
 
+def reverse_dns(ip_address):
+    try:
+        domain = socket.gethostbyaddr(ip_address)[0]
+        return domain
+    except Exception as e:
+        return False
+
 def arp_scan(target_ip):
     try:
         # Tworzenie ramki Ethernet (Ether) i zapytania ARP
@@ -15,12 +22,13 @@ def arp_scan(target_ip):
 
         # Wyświetlenie uzyskanych odpowiedzi
         for sent, received in result:
-            return received[ARP].hwsrc
+            return received[ARP].hwsrc + " " + searchByVendor(received[ARP].hwsrc)
     except Exception as e:
         print(f"Error during ARP scan: {e}")
         return "Unknown"
 
 def ip_information(target_ip):
+    print("Verifying reachibility to:", target_ip)
     try:
         #if not arp_scan(target_ip):
         #    print("ARP scan failed")
@@ -29,17 +37,19 @@ def ip_information(target_ip):
         packet = IP(dst=target_ip) / ICMP()
 
         # Sending ICMP packet and receiving response
-        response = sr1(packet, timeout=2, verbose=0)
+        response = sr1(packet, timeout=0.5, verbose=0)
 
         if response:
-            #print("IP Address:", response.src)
-            print("Reverse DNS:", socket.gethostbyaddr(response.src)[0])
+            print("✔ device with given IP is reachible")
             if response.haslayer("Ether"):  # Sprawdzenie, czy pakiet zawiera warstwę Ether (MAC)
-                print("MAC Address:", response.srcmac)  # Adres MAC
+                print("MAC Address:", response.srcmac, searchByVendor(response.srcmac))  # Adres MAC
             else:
                 print("MAC Address:", arp_scan(target_ip))
 
             print("TTL:", response.ttl)  # Time to Live
+
+            if reverse_dns(target_ip):
+                print("Reverse DNS:", reverse_dns(target_ip))
 
             # print(response.summary())  # Packet summary
             return True
@@ -52,4 +62,8 @@ def ip_information(target_ip):
 
 if __name__ == "__main__":
     # Użycie funkcji do uzyskania informacji o danym adresie IP
+    from mac_vendor_finder import searchByVendor
     ip_information("192.168.0.105")
+
+else:
+    from modules.mac_vendor_finder import searchByVendor
