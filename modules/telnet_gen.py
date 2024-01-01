@@ -20,17 +20,12 @@ async def simulate_telnet_user(host, username, password):
         await reader.readuntil(b"Password: ")
         writer.write(password + "\n")
 
-        # Wait for a brief moment for the login process
-        await asyncio.sleep(0.5)
-
-        # Example: Sending a command after login (change this to suit your requirements)
-        writer.write("ls\n")
-
         # Read and print the output after sending the command
         output = await reader.readuntil(b"$")
         vprint(output.decode('ascii'))
 
-        # Close the Telnet connection
+        writer.write("exit\n")
+        await writer.drain()  # Wait for all data to be written
         writer.close()
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
@@ -39,6 +34,7 @@ async def simulate_telnet_user(host, username, password):
 # Replace 'your_username', 'your_password' with your Telnet server details
 def generate_telnet_traffic(dstIP):
     asyncio.run(simulate_telnet_user(dstIP, 'pi', 'raspberry'))
+
 
 if __name__ == "__main__":
     verbose = True
