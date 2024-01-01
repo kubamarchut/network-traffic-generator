@@ -12,13 +12,12 @@ def simulate_ftp_interaction(hostname, username, password):
         ftp.login(user=username, passwd=password)
 
         # List the current directory
-        ftp.retrlines('LIST')
-
-        # Change directory (e.g., to 'example_dir')
-        ftp.cwd('example_dir')
+        ftp.retrlines('LIST', vprint)
+        # Change directory
+        ftp.cwd('upload')
 
         # List contents of the changed directory
-        ftp.retrlines('LIST')
+        ftp.retrlines('LIST', vprint)
 
         # Close the FTP connection
         ftp.quit()
