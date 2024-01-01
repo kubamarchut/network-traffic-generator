@@ -8,15 +8,29 @@ Skrypt Generatora Ruchu Sieciowego pozwala na symulację ruchu sieciowego poprze
 
 ### Instalacja ⚙️
 
-Po pierwsze wymagane jest pobranie skryptu można to zrobić klonując to repozytorium.
+1. Pobierz skrypt np. klonując to repozytorium:
 
 ```bash
 git clone https://github.com/kubamarchut/network-traffic-generator.git
 ```
 
+2. Przejdź do katalogu zawierającego skrypt:
+
+```bash
+cd network-traffic-generator
+```
+
+3. Upewnij się, że masz zainstalowane wszystkie wymagane biblioteki Pythona. Użyj pliku `requirements.txt` do instalacji potrzebnych zależności:
+
+```bash
+pip install -r requirements.txt
+```
+
+Ten krok zapewni, że wszystkie wymagane biblioteki są zainstalowane na Twoim systemie. Po zakończeniu instalacji możesz rozpocząć korzystanie z Generatora Ruchu Sieciowego.
+
 ### Rozpoczęcie pracy 🎉
 
-Aby uruchomić Generator Ruchu Sieciowego, otwórz terminal lub wiersz poleceń i przejdź do katalogu zawierającego skrypt.
+Aby uruchomić Generator Ruchu Sieciowego, otwórz terminal lub wiersz poleceń i upewnij się że znajdujesz się w katalogu zawierającym skrypt, w razie potrzeby przejdź do niego.
 
 ```bash
 cd network-traffic-generator
