@@ -38,7 +38,7 @@ def run_traffic_simultaneously(threads_count, thread_time_span, dstIP, test_dst)
             print("Traffic destination unreacheble")
             sys.exit()
 
-    print(f"starting {threads_count} threads")
+    print(f"\nstarting {threads_count} threads")
     print(f"each thread will run for {thread_time_span}s\n")
 
     time.sleep(1)
